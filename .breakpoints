@@ -1,0 +1,20 @@
+{
+  "files": {
+    "controle/Controlador_enfermeiro.py": [
+      {
+        "id": "4d059929-b0a3-4cb0-bd73-20cb62979e3e",
+        "line": 1,
+        "version": 216,
+        "index": 0
+      }
+    ],
+    "controle/controlador_enfermeiro.py": [
+      {
+        "id": "56610892-df4f-442f-9979-eda4eddae7f0",
+        "line": 34,
+        "version": 1033,
+        "index": 995
+      }
+    ]
+  }
+}
