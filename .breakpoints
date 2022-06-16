@@ -8,12 +8,20 @@
         "index": 0
       }
     ],
-    "controle/controlador_enfermeiro.py": [
+    "controle/controlador_paciente.py": [
       {
-        "id": "56610892-df4f-442f-9979-eda4eddae7f0",
-        "line": 34,
-        "version": 1033,
-        "index": 995
+        "id": "ec447178-4b5e-4a8d-a2e4-2baa9612061f",
+        "line": 24,
+        "version": 1942,
+        "index": 752
+      }
+    ],
+    "modelo/pessoa.py": [
+      {
+        "id": "b6f848a9-2c5f-4d70-948e-20633aca0237",
+        "line": 11,
+        "version": 1,
+        "index": 269
       }
     ]
   }

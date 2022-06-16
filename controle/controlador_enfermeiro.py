@@ -7,12 +7,12 @@ import datetime
 
 class ControladorEnfermeiro:
   def __init__(self):
-    self.__enfermeiros = [Enfermeiro("nome", 1234567, datetime.datetime.now(), 4798840, "admin@gmail.com", "admin", 123)]
+    self.__enfermeiros = [Enfermeiro("nome", 1234567, datetime.datetime.now(), 4798840, "a", "a", 123)]
     self.__tela_enfermeiro = TelaEnfermeiro()
     self.__manter_tela = True
 
-  def incluir(self):
-    pass
+    self.__controlador_paciente = ControladorPaciente()
+
   
   def retornar(self):
     exit(0)
@@ -30,10 +30,10 @@ class ControladorEnfermeiro:
 
   
   def abre_tela_inicial(self):
-    switcher = {0: self.retornar, 1: ControladorPaciente.incluir_paciente, 2: self.incluir}
+    switcher = {0: self.retornar, 1: self.__controlador_paciente.inclui_paciente, 3: self.__controlador_paciente.lista_pacientes}
     self.__manter_tela = True
     while self.__manter_tela:
       opcao_escolhida = self.__tela_enfermeiro.mostra_tela_opcoes()
       funcao_escolhida = switcher[opcao_escolhida]
       funcao_escolhida()
-        
+      #separar sistema do controlador enf/paciente

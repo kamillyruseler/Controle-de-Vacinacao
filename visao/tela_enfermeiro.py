@@ -17,6 +17,7 @@ class TelaEnfermeiro:
     print ("O que você deseja fazer?")
     print ("1 - Incluir Paciente")
     print ("2 - Incluir Vacina")
-    print ("0 - Retornar")
+    print ("3 - LISTAR paciente")
+    print ("0 - Sair")
     opcao = int(input("Opção: "))
     return opcao

@@ -13,10 +13,10 @@ class ControladorSistema:
           if opcao_escolhida == 1:
             if (self.__controlador_enfermeiro.logar()):
               self.__controlador_enfermeiro.abre_tela_inicial()
-            elif opcao_escolhida == 2:
-              pass
-            else:
-              break
+            #else:
+            #  self.__controlador_enfermeiro.logar()
+          elif opcao_escolhida == 0:
+            exit(0)
 
 if __name__ == "__main__":
     ControladorSistema().iniciar()
