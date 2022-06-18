@@ -2,6 +2,9 @@ from visao.tela_paciente import TelaPaciente
 from modelo.paciente import Paciente
 from datetime import datetime
 
+from dateutil.relativedelta import relativedelta
+
+
 class ControladorPaciente():
 
   def __init__(self):
@@ -15,7 +18,14 @@ class ControladorPaciente():
     paciente = Paciente(dados_paciente["nome"],dados_paciente["cpf"], data_de_nascimento, dados_paciente["telefone"], dados_paciente["nome_responsavel"])
     self.__pacientes.append(paciente)
     self.__tela_paciente.mostra_mensagem("Cadastrado com sucesso!")
-
+    
+    #separar essa parte em um novo método calcular_idade
+    d2 = datetime.now()
+    diferenca =  relativedelta(d2, data_de_nascimento)
+    self.__tela_paciente.mostra_mensagem(("{} anos, {} meses, {} dias"
+       .format(diferenca.years, diferenca.months, diferenca.days)))
+  
+  
   def lista_pacientes(self):
     if len(self.__pacientes)!=0:
       for paciente in self.__pacientes:

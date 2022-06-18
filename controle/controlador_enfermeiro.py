@@ -1,13 +1,12 @@
 from visao.tela_enfermeiro import TelaEnfermeiro
 from modelo.enfermeiro import Enfermeiro
 from controle.controlador_paciente import ControladorPaciente
-import datetime 
 
 #lista de enfermeiros autorizados no sistema
 
 class ControladorEnfermeiro:
   def __init__(self):
-    self.__enfermeiros = [Enfermeiro("nome", 1234567, datetime.datetime.now(), 4798840, "a", "a", 123)]
+    self.__enfermeiros = [Enfermeiro("Enfermeiro teste", 1234567, 10/12/1998, 4798840, "a", "a", 123)] #código do enfermeiro continua sendo útil?
     self.__tela_enfermeiro = TelaEnfermeiro()
     self.__manter_tela = True
 
