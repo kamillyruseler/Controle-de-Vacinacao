@@ -4,6 +4,7 @@ class TelaSistema:
   def __init__(self):
     pass
 
+  
   def mostrar_menu_inicial(self):
     print("Bem-vindo a tela inicial")
     print ("")

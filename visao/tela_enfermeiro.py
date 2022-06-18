@@ -5,19 +5,26 @@ class TelaEnfermeiro:
     pass
 
   def mostra_tela_login(self):
+    print("\n")
     print ("Por favor, informe os seus dados:")
     email = input("Email: ")
     senha = input("Senha: ")
+    print("")
     return {"email": email, "senha": senha}
 
   def mostra_mensagem (self, mensagem: str):
     print (mensagem)
 
   def mostra_tela_opcoes(self):
-    print ("O que você deseja fazer?")
-    print ("1 - Incluir Paciente")
-    print ("2 - Incluir Vacina")
-    print ("3 - LISTAR paciente")
+    print("")
+    print ("Área de pacientes")
+    print ("1 - Incluir paciente")
+    print ("2 - Listar paciente")
+    print ("3 - Excluir paciente")
+    print ("4 - Alterar paciente, não funciona")
     print ("0 - Sair")
+    print("")
+    print("Área de vacinas")
+    print ("5 - Incluir Vacina")
     opcao = int(input("Opção: "))
     return opcao

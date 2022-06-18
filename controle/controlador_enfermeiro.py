@@ -30,10 +30,10 @@ class ControladorEnfermeiro:
 
   
   def abre_tela_inicial(self):
-    switcher = {0: self.retornar, 1: self.__controlador_paciente.inclui_paciente, 3: self.__controlador_paciente.lista_pacientes}
+    switcher = {0: self.retornar, 1: self.__controlador_paciente.inclui_paciente, 2: self.__controlador_paciente.lista_pacientes, 3: self.__controlador_paciente.excluir_paciente, 4: self.__controlador_paciente.altera_paciente, 5: self.retornar}
     self.__manter_tela = True
     while self.__manter_tela:
       opcao_escolhida = self.__tela_enfermeiro.mostra_tela_opcoes()
       funcao_escolhida = switcher[opcao_escolhida]
       funcao_escolhida()
-      #separar sistema do controlador enf/paciente
+      
