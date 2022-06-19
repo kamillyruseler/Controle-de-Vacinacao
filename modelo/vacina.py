@@ -1,22 +1,22 @@
 
 
 class Vacina():
-  def __init__(self, doencas, faixa_etaria_inicial: int, faixa_etaria_final: int):
-    if isinstance (doencas, dict):
-      self.__doencas = doencas
+  def __init__(self, doenca, faixa_etaria_inicial: int, faixa_etaria_final: int):
+    if isinstance (doenca, str):
+      self.__doenca = doenca
     if isinstance (faixa_etaria_inicial, int):
       self.__faixa_etaria_inicial = faixa_etaria_inicial
     if isinstance (faixa_etaria_final, int):
       self.__faixa_etaria_final = faixa_etaria_final
 
   @property
-  def doencas(self):
-    return self.__doencas
+  def doenca(self):
+    return self.__doenca
 
-  @doencas.setter
-  def doencas (self, doencas: dict):
-    if isinstance (doencas, dict):
-      self.__doencas = doencas
+  @doenca.setter
+  def doenca (self, doenca: str):
+    if isinstance (doenca, str):
+      self.__doenca = doenca
 
   @property
   def faixa_etaria_inicial (self):
@@ -34,4 +34,4 @@ class Vacina():
   @faixa_etaria_final.setter
   def faixa_etaria_final (self, faixa_etaria_final: int):
     if isinstance (faixa_etaria_final, int):
-      self.__faixa_etaria_inicial = faixa_etaria_final
+      self.__faixa_etaria_final = faixa_etaria_final

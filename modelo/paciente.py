@@ -14,7 +14,7 @@ class Paciente(Pessoa):
     return self.__nome_responsavel
 
   @nome_responsavel.setter
-  def nome_responvabel(self, nome_responsavel: str):
+  def nome_responsavel(self, nome_responsavel: str):
     if isinstance(nome_responsavel, str):
       self.__nome_responsabel = nome_responsavel
 
