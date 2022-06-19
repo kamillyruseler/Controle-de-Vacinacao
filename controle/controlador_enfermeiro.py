@@ -5,6 +5,7 @@ from controle.controlador_vacina import ControladorVacina
 #from modelo.dose import Dose
 from visao.tela_dose import TelaDose
 #lista de enfermeiros autorizados no sistema
+from controle.controlador_vacinacao import ControladorVacinacao
 
 class ControladorEnfermeiro:
   def __init__(self):
@@ -15,6 +16,7 @@ class ControladorEnfermeiro:
 
     self.__controlador_paciente = ControladorPaciente()
     self.__controlador_vacina = ControladorVacina()
+    self.__controlador_vacinacao = ControladorVacinacao()
     
 
   
@@ -34,7 +36,7 @@ class ControladorEnfermeiro:
 
   
   def abre_tela_inicial(self):
-    switcher = {0: self.retornar, 1: self.__controlador_paciente.inclui_paciente, 2: self.__controlador_paciente.lista_pacientes, 3: self.__controlador_paciente.excluir_paciente, 4: self.__controlador_paciente.altera_paciente, 5: self.__controlador_vacina.incluir_vacina, 6: self.__controlador_vacina.lista_vacinas, 7: self.__controlador_vacina.alterar_vacina, 8: self.__controlador_vacina.excluir_vacina, 9: self.__controlador_vacina.incluir_dose, 10: self.__controlador_vacina.lista_doses}
+    switcher = {0: self.retornar, 1: self.__controlador_paciente.inclui_paciente, 2: self.__controlador_paciente.lista_pacientes, 3: self.__controlador_paciente.excluir_paciente, 4: self.__controlador_paciente.altera_paciente, 5: self.__controlador_vacina.incluir_vacina, 6: self.__controlador_vacina.lista_vacinas, 7: self.__controlador_vacina.alterar_vacina, 8: self.__controlador_vacina.excluir_vacina, 9: self.__controlador_vacina.incluir_dose, 10: self.__controlador_vacina.lista_doses, 11: self.__controlador_vacinacao.registrar_vacinacao, 12: self.__controlador_vacinacao.lista_vacinacao}
     self.__manter_tela = True
     while self.__manter_tela:
       opcao_escolhida = self.__tela_enfermeiro.mostra_tela_opcoes()

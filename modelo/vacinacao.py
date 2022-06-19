@@ -1,37 +1,59 @@
 from datetime import date
+from modelo.vacina import Vacina
+from modelo.dose import Dose
+
+#revendo necessidade do código de vacinação
+
+#(dados_vacinacao ["cpf"], dados_vacinacao["data_de_vacinacao"], dados_vacinacao["doenca"], dados_vacinacao["dose"])
 
 class Vacinacao():
-  def __init__(self, codigo_vacinacao: int, data_vacinacao: date, data_retorno: date):
-    if isinstance(codigo_vacinacao, int):
-      self.__codigo_vacinacao = codigo_vacinacao
-    if isinstance (data_vacinacao, date):
-      self.__data_vacinacao = data_vacinacao
-    if isinstance (data_retorno, date):
-      self.__data_retorno = date
+  def __init__(self, cpf: int, data_de_vacinacao: date, vacina: Vacina, dose: Dose):
+    if isinstance (data_de_vacinacao, date):
+      self.__data_de_vacinacao = data_de_vacinacao
+    self.__vacinas = []
 
-  @property
-  def codigo_vacinacao(self):
-    return self.__codigo_vacinacao
-    
-  @codigo_vacinacao.setter
-  def codigo_vacinacao (self, codigo_vacinacao: int):
-    if isinstance(codigo_vacinacao, int):
-      self.__codigo_vacinacao = codigo_vacinacao
-
-  @property
-  def data_vacinacao(self):
-    return self.__data_vacinacao
+  #lista de vacinas para gerar relatório
   
-  @data_vacinacao.setter
-  def data_vacinacao (self, data_vacinacao: date):
-    if isinstance (data_vacinacao, date):
-      self.__data_vacinacao = data_vacinacao
-
   @property
-  def data_retorno(self):
-    return self.__data_retorno
+  def dose(self):
+    return self.__dose
   
-  @data_retorno.setter
-  def data_retorno (self, data_retorno: date):
-    if isinstance (data_retorno, date):
-      self.__data_vacinacao = data_retorno
+  @dose.setter
+  def dose (self, dose: Dose):
+    if isinstance (dose, Dose):
+      self.__dose = dose
+
+  
+  @property
+  def vacina(self):
+    return self.__vacina
+  
+  @vacina.setter
+  def vacina (self, vacina: Vacina):
+    if isinstance (vacina, Vacina):
+      self.__vacina = vacina
+
+  
+  @property
+  def cpf(self):
+    return self.__cpf
+  
+  @cpf.setter
+  def cpf (self, cpf: int):
+    if isinstance (cpf, int):
+      self.__cpf = cpf
+  
+  
+  @property
+  def vacinas (self):
+    return self.__vacinas
+  
+  @property
+  def data_de_vacinacao(self):
+    return self.__data_de_vacinacao
+  
+  @data_de_vacinacao.setter
+  def data_de_vacinacao (self, data_de_vacinacao: date):
+    if isinstance (data_de_vacinacao, date):
+      self.__data_de_vacinacao = data_de_vacinacao
+

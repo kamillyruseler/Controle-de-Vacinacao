@@ -1,4 +1,4 @@
-from modelo.dose import Dose
+
 
 class Vacina():
   def __init__(self, doenca, faixa_etaria_inicial: int, faixa_etaria_final: int):

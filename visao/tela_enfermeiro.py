@@ -34,6 +34,10 @@ class TelaEnfermeiro:
     print("Área de doses")
     print ("9 - Incluir dose")
     print ("10 - Listar doses")
+    print("")
+    print("Área de vacinação")
+    print ("11 - Registrar vacinação")
+    print ("12 - Listar vacinação, não está funcionando")
     print("*******")
     opcao = int(input("Opção: "))
     return opcao
