@@ -1,6 +1,6 @@
 from modelo.vacina import Vacina
 from visao.tela_vacina import TelaVacina
-
+#from modelo.dose import Dose
 
 class ControladorVacina():
 
@@ -43,11 +43,13 @@ class ControladorVacina():
 
   def excluir_vacina(self):
     self.lista_vacinas()
-    doenca = self.__tela_vacina.seleciona_vacina()
-    vacina = self.pega_vacina_por_doenca(doenca)
 
-    if(vacina is not None):
+    if len(self.__vacinas)!=0:
+      doenca = self.__tela_vacina.seleciona_vacina()
+      vacina = self.pega_vacina_por_doenca(doenca)
       self.__vacinas.remove(vacina)
       self.lista_vacinas()
     else:
       self.__tela_vacina.mostra_mensagem("ATENÇÃO: vacina não existente")
+
+  

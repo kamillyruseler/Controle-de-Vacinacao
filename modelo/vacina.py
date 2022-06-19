@@ -1,7 +1,8 @@
-
+from modelo.dose import Dose
 
 class Vacina():
   def __init__(self, doenca, faixa_etaria_inicial: int, faixa_etaria_final: int):
+    self.__doses = []
     if isinstance (doenca, str):
       self.__doenca = doenca
     if isinstance (faixa_etaria_inicial, int):
@@ -35,3 +36,9 @@ class Vacina():
   def faixa_etaria_final (self, faixa_etaria_final: int):
     if isinstance (faixa_etaria_final, int):
       self.__faixa_etaria_final = faixa_etaria_final
+
+  @property
+  def doses (self):
+    return self.__doses
+
+  
