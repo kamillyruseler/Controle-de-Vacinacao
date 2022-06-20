@@ -16,7 +16,7 @@ class ControladorEnfermeiro:
 
     self.__controlador_paciente = ControladorPaciente()
     self.__controlador_vacina = ControladorVacina()
-    self.__controlador_vacinacao = ControladorVacinacao()
+    self.__controlador_vacinacao = ControladorVacinacao(self.__controlador_paciente, self.__controlador_vacina)
     
 
   

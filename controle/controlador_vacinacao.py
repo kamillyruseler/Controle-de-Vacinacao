@@ -1,37 +1,35 @@
 #cálculo da próxima dose
 #listar vacinas que o paciente precisa tomar
-from modelo.vacina import Vacina
 from visao.tela_vacinacao import TelaVacinacao
-from modelo.paciente import Paciente
-from modelo.dose import Dose
 from modelo.vacinacao import Vacinacao
-from controle.controlador_paciente import ControladorPaciente
-from controle.controlador_vacina import ControladorVacina
+from datetime import datetime
 
 
 class ControladorVacinacao():
-  def __init__(self):
-    
+  def __init__(self, controlador_paciente, controlador_vacina):
     self.__doses = []
     self.__vacinacao = []
     self.__tela_vacinacao = TelaVacinacao()
-    self.__controlador_paciente = ControladorPaciente()
-    self.__controlador_vacina = ControladorVacina()
-    self.__pacientes = Paciente
+    self.__controlador_paciente = controlador_paciente
+    self.__controlador_vacina = controlador_vacina
 
+  
   def registrar_vacinacao (self):
     dados_vacinacao = self.__tela_vacinacao.pega_dados()
-    vacinacao = Vacinacao(dados_vacinacao ["cpf"], dados_vacinacao["data_de_vacinacao"], dados_vacinacao["vacina"], dados_vacinacao["dose"])
+    data_de_vacinacao = datetime.strptime(dados_vacinacao["data_de_vacinacao"], "%d/%m/%Y")
+    vacinacao = Vacinacao(dados_vacinacao ["cpf"], data_de_vacinacao, dados_vacinacao["vacina"], dados_vacinacao["dose"])
     self.__vacinacao.append(vacinacao)
 
     self.__tela_vacinacao.mostra_mensagem("Cadastrado com sucesso!")
     
 
-
   def lista_vacinacao(self):
     if len(self.__vacinacao)!=0:
+        cpf = self.__tela_vacinacao.pegar_cpf()
         for vacinacao in self.__vacinacao:
-          print("teste")
-
+            if vacinacao.cpf == cpf:
+              self.__tela_vacinacao.mostra_vacinacao(vacinacao.data_de_vacinacao,
+                                                     vacinacao.vacina,
+                                                     vacinacao.dose)
     else:
       self.__tela_vacinacao.mostra_mensagem("Atenção: não existem vacinas aplicadas")

@@ -1,15 +1,19 @@
 from datetime import date
-from modelo.vacina import Vacina
-from modelo.dose import Dose
 
 #revendo necessidade do código de vacinação
 
 #(dados_vacinacao ["cpf"], dados_vacinacao["data_de_vacinacao"], dados_vacinacao["doenca"], dados_vacinacao["dose"])
 
 class Vacinacao():
-  def __init__(self, cpf: int, data_de_vacinacao: date, vacina: Vacina, dose: Dose):
+  def __init__(self, cpf: int, data_de_vacinacao: date, vacina: str, dose: str):
     if isinstance (data_de_vacinacao, date):
       self.__data_de_vacinacao = data_de_vacinacao
+    if isinstance(cpf, int):
+        self.__cpf = cpf
+    if isinstance(vacina, str):
+        self.__vacina = vacina
+    if isinstance(dose, str):
+        self.__dose = dose
     self.__vacinas = []
 
   #lista de vacinas para gerar relatório
@@ -19,8 +23,8 @@ class Vacinacao():
     return self.__dose
   
   @dose.setter
-  def dose (self, dose: Dose):
-    if isinstance (dose, Dose):
+  def dose (self, dose: str):
+    if isinstance (dose, str):
       self.__dose = dose
 
   
@@ -29,8 +33,8 @@ class Vacinacao():
     return self.__vacina
   
   @vacina.setter
-  def vacina (self, vacina: Vacina):
-    if isinstance (vacina, Vacina):
+  def vacina (self, vacina: str):
+    if isinstance (vacina, str):
       self.__vacina = vacina
 
   
@@ -56,4 +60,3 @@ class Vacinacao():
   def data_de_vacinacao (self, data_de_vacinacao: date):
     if isinstance (data_de_vacinacao, date):
       self.__data_de_vacinacao = data_de_vacinacao
-

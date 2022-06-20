@@ -1,7 +1,6 @@
 from visao.tela_paciente import TelaPaciente
 from modelo.paciente import Paciente
 from datetime import datetime
-
 from dateutil.relativedelta import relativedelta
 #pip install python-dateutil
 
@@ -22,14 +21,17 @@ class ControladorPaciente():
     self.calcular_idade(data_de_nascimento)
     
 
-
   def calcular_idade(self, data_de_nascimento):
     d2 = datetime.now()
     diferenca =  relativedelta(d2, data_de_nascimento)
     self.__tela_paciente.mostra_mensagem(("{} ano(s), {} mes(es), {} dias"
        .format(diferenca.years, diferenca.months, diferenca.days)))   
 
-    
+  def proximas_doses (self):
+    for vacina in self.__vacinas:
+      print (diferenca.months)
+    #verificar pela faixa etária. 
+    #def calcular_idade em controlador_paciente
   
   def lista_pacientes(self):
     if len(self.__pacientes)!=0:
