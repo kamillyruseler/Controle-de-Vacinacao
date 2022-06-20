@@ -8,6 +8,14 @@
         "index": 0
       }
     ],
+    "controle/controlador_paciente.py": [
+      {
+        "id": "f1d493c4-6307-4029-946f-c2aa5b7f77ee",
+        "line": 4,
+        "version": 4115,
+        "index": 112
+      }
+    ],
     "modelo/pessoa.py": [
       {
         "id": "b6f848a9-2c5f-4d70-948e-20633aca0237",

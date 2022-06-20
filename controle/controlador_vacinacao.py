@@ -7,6 +7,8 @@ class ControladorVacinacao():
   def __init__(self, controlador_paciente, controlador_vacina):
     self.__doses = []
     self.__vacinacao = []
+    self.__pacientes = []
+    self.__vacinas = []
     self.__tela_vacinacao = TelaVacinacao()
     self.__controlador_paciente = controlador_paciente
     self.__controlador_vacina = controlador_vacina
@@ -17,7 +19,6 @@ class ControladorVacinacao():
     data_de_vacinacao = datetime.strptime(dados_vacinacao["data_de_vacinacao"], "%d/%m/%Y")
     vacinacao = Vacinacao(dados_vacinacao ["cpf"], data_de_vacinacao, dados_vacinacao["vacina"], dados_vacinacao["dose"])
     self.__vacinacao.append(vacinacao)
-
     self.__tela_vacinacao.mostra_mensagem("Cadastrado com sucesso!")
     
 

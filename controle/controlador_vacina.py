@@ -20,8 +20,14 @@ class ControladorVacina():
   def incluir_vacina(self):
     dados_vacina = self.__tela_vacina.pega_dados()
     vacina = Vacina(dados_vacina["doenca"], dados_vacina["faixa_etaria_inicial"], dados_vacina["faixa_etaria_final"])
-    self.__vacinas.append(vacina)
-    self.__tela_vacina.mostra_mensagem("Cadastrado com sucesso!")
+    existe = False
+    for vacina in self.__vacinas:
+      if vacina.doenca == dados_vacina["doenca"]:
+        existe = True
+        self.__tela_vacina.mostra_mensagem("Erro. Já existe uma vacina come esse nome")
+    if not existe:
+      self.__vacinas.append(vacina)
+      self.__tela_vacina.mostra_mensagem("Cadastrado com sucesso!")
 
   def alterar_vacina(self):
     self.lista_vacinas()
@@ -66,8 +72,15 @@ class ControladorVacina():
   def incluir_dose(self):
     dados_dose = self.__tela_dose.pega_dados()
     dose = Dose(dados_dose["doenca"], dados_dose["lote"])
-    self.__doses.append(dose)
-    self.__tela_dose.mostra_mensagem("Cadastrado com sucesso!")
+    existe = False
+
+    for vacina in self.__vacinas:
+      if (vacina.doenca == dados_dose["doenca"]):
+        existe = True
+        self.__doses.append(dose)
+        self.__tela_dose.mostra_mensagem("Cadastrado com sucesso!")
+    if not existe:
+      self.__tela_dose.mostra_mensagem("Erro. Não existe nenhuma vacina com esse nome")
 
   def lista_doses(self):
       if len(self.__doses)!=0:

@@ -16,9 +16,16 @@ class ControladorPaciente():
     dados_paciente = self.__tela_paciente.pega_dados()
     data_de_nascimento = datetime.strptime(dados_paciente["data_de_nascimento"], "%d/%m/%Y")
     paciente = Paciente(dados_paciente["nome"],dados_paciente["cpf"], data_de_nascimento, dados_paciente["telefone"], dados_paciente["nome_responsavel"])
-    self.__pacientes.append(paciente)
-    self.__tela_paciente.mostra_mensagem("Cadastrado com sucesso!")
-    self.calcular_idade(data_de_nascimento)
+    existe = False
+    for paciente in self.__pacientes:
+      if (paciente.cpf == dados_paciente["cpf"]):
+        existe = True
+        self.__tela_paciente.mostra_mensagem("Erro. Já existe um paciente com esse CPF")
+    if not existe:
+      self.__pacientes.append(paciente)
+      self.__tela_paciente.mostra_mensagem("Cadastrado com sucesso!")
+      self.calcular_idade(data_de_nascimento)
+      
     
 
   def calcular_idade(self, data_de_nascimento):
@@ -34,22 +41,6 @@ class ControladorPaciente():
     else:
       self.__tela_paciente.mostra_mensagem("Atenção: não existem pacientes cadastrados")
 
-
-  def altera_paciente(self):
-    self.lista_pacientes()
-    if (len(self.__pacientes)) != 0:
-      cpf_paciente = self.__tela_paciente.seleciona_paciente()
-      paciente = self.pega_paciente_por_cpf(cpf_paciente)
-      if (paciente is not None):
-        novos_dados = self.__tela_paciente.pega_dados()
-        paciente.nome = novos_dados["nome"]
-        paciente.cpf = novos_dados["cpf"]
-        paciente.data_de_nascimento = novos_dados["data_de_nascimento"]
-        paciente.telefone = novos_dados["telefone"]
-        paciente.nome_responsavel = novos_dados["nome_responsavel"]
-        self.lista_pacientes()
-      else:
-        self.__tela_paciente.mostra_mensagem("Atenção: paciente não existe. Tente novamente.")
 
   def pega_paciente_por_cpf(self, cpf: int):
     for paciente in self.__pacientes:

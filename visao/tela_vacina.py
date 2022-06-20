@@ -4,7 +4,7 @@ class TelaVacina():
   def pega_dados(self):
     print("")
     print("Informe os dados: ")
-    doenca = input("Doença: ")
+    doenca = input("Doença/nome da vacina: ")
 
     while True:
       try:     
@@ -25,13 +25,13 @@ class TelaVacina():
 
   def mostra_vacina(self, dados_vacina):
     print ("")
-    print("Doença: ", dados_vacina["doenca"])
+    print("Doença/nome da vacina: ", dados_vacina["doenca"])
     print("Faixa etária inicial (meses): ", dados_vacina["faixa_etaria_inicial"])
     print("Faixa etária FINAL (meses): ", dados_vacina["faixa_etaria_final"])
     print("\n")
 
   def seleciona_vacina(self):
-    doenca = input("Doença que deseja selecionar: ")
+    doenca = input("Doença/nome da vacina que deseja selecionar: ")
     return doenca
 
   def mostra_mensagem(self, msg):

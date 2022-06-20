@@ -13,7 +13,7 @@ class TelaVacinacao():
           except:
             print ("Valor inválido. Digite um número inteiro, sem caracteres")
         data_de_vacinacao = input("Data de vacinação (DD/MM/YYYY): ")
-        vacina = input("Nome da vacina: ")
+        vacina = input("Nome da vacina/doença: ")
         dose = input("Código do lote: ")
         print("")
         return {
@@ -31,7 +31,7 @@ class TelaVacinacao():
     def mostra_vacinacao(self, data_de_vacinacao, doenca, lote):
         print("")
         print("Data: ", data_de_vacinacao)
-        print("Doença: ", doenca)
+        print("Doença/nome da vacina: ", doenca)
         print("Lote: ", lote)
         print("\n")
 
