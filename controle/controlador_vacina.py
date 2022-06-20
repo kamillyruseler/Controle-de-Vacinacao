@@ -64,7 +64,11 @@ class ControladorVacina():
 
       if (vacina is not None):
         self.__vacinas.remove(vacina)
+        for dose in self.__doses:
+          if dose.doenca == vacina.doenca:
+            self.__doses.remove(dose)
         self.lista_vacinas()
+        self.lista_doses()
       else:
         self.__tela_vacina.mostra_mensagem("ATENÇÃO: vacina não existente")
 
