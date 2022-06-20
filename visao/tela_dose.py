@@ -5,7 +5,12 @@ class TelaDose():
   def pega_dados(self):
     print("")
     print("Informe os dados: ")
-    doenca = input("Doença: ")
+    while True:
+      try:
+        doenca = str(input("Doença: "))
+        break
+      except:
+        print ("Valor inválido")
     lote = str(input("Lote: "))
     print("")
     return {"doenca": doenca, "lote": lote}

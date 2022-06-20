@@ -25,17 +25,19 @@ class ControladorVacina():
 
   def alterar_vacina(self):
     self.lista_vacinas()
-    doenca = self.__tela_vacina.seleciona_vacina()
-    vacina = self.pega_vacina_por_doenca(doenca)
 
-    if(vacina is not None):
-      novos_dados_vacina = self.__tela_vacina.pega_dados()
-      vacina.doenca = novos_dados_vacina["doenca"]
-      vacina.faixa_etaria_inicial = novos_dados_vacina["faixa_etaria_inicial"]
-      vacina.faixa_etaria_final = novos_dados_vacina["faixa_etaria_final"]
-      self.lista_vacinas()
-    else:
-      self.__tela_vacina.mostra_mensagem("ATENCAO: Vacina não existente")
+    if (len(self.__vacinas)) != 0:
+      doenca = self.__tela_vacina.seleciona_vacina()
+      vacina = self.pega_vacina_por_doenca(doenca)
+
+      if(vacina is not None):
+        novos_dados_vacina = self.__tela_vacina.pega_dados()
+        vacina.doenca = novos_dados_vacina["doenca"]
+        vacina.faixa_etaria_inicial = novos_dados_vacina["faixa_etaria_inicial"]
+        vacina.faixa_etaria_final = novos_dados_vacina["faixa_etaria_final"]
+        self.lista_vacinas()
+      else:
+        self.__tela_vacina.mostra_mensagem("ATENCAO: Vacina não existente")
 
   def lista_vacinas(self):
     if len(self.__vacinas)!=0:
@@ -48,15 +50,18 @@ class ControladorVacina():
       self.__tela_vacina.mostra_mensagem("Atenção: não existem vacinas cadastradas")
 
   def excluir_vacina(self):
+    
     self.lista_vacinas()
-
     if len(self.__vacinas)!=0:
       doenca = self.__tela_vacina.seleciona_vacina()
       vacina = self.pega_vacina_por_doenca(doenca)
-      self.__vacinas.remove(vacina)
-      self.lista_vacinas()
-    else:
-      self.__tela_vacina.mostra_mensagem("ATENÇÃO: vacina não existente")
+
+      if (vacina is not None):
+        self.__vacinas.remove(vacina)
+        self.lista_vacinas()
+      else:
+        self.__tela_vacina.mostra_mensagem("ATENÇÃO: vacina não existente")
+
 
   def incluir_dose(self):
     dados_dose = self.__tela_dose.pega_dados()

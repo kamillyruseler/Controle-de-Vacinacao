@@ -9,5 +9,10 @@ class TelaSistema:
     print ("")
     print ("Digite 1 para realizar o seu login")
     print ("Digite 0 para sair")
-    opcao = int(input("Opção: "))
+    while True:
+      try:
+        opcao = int(input("Opção: "))
+        break
+      except:
+        print ("Valor inválido. Digite 1 ou 0")
     return opcao

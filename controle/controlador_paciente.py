@@ -37,19 +37,19 @@ class ControladorPaciente():
 
   def altera_paciente(self):
     self.lista_pacientes()
-    cpf_paciente = self.__tela_paciente.seleciona_paciente()
-    paciente = self.pega_paciente_por_cpf(cpf_paciente)
-   
-    if (paciente is not None):
-      novos_dados = self.__tela_paciente.pega_dados()
-      paciente.nome = novos_dados["nome"]
-      paciente.cpf = novos_dados["cpf"]
-      paciente.data_de_nascimento = novos_dados["data_de_nascimento"]
-      paciente.telefone = novos_dados["telefone"]
-      paciente.nome_responsavel = novos_dados["nome_responsavel"]
-      self.lista_pacientes()
-    else:
-      self.__tela_paciente.mostra_mensagem("Atenção: paciente não existe. Tente novamente.")
+    if (len(self.__pacientes)) != 0:
+      cpf_paciente = self.__tela_paciente.seleciona_paciente()
+      paciente = self.pega_paciente_por_cpf(cpf_paciente)
+      if (paciente is not None):
+        novos_dados = self.__tela_paciente.pega_dados()
+        paciente.nome = novos_dados["nome"]
+        paciente.cpf = novos_dados["cpf"]
+        paciente.data_de_nascimento = novos_dados["data_de_nascimento"]
+        paciente.telefone = novos_dados["telefone"]
+        paciente.nome_responsavel = novos_dados["nome_responsavel"]
+        self.lista_pacientes()
+      else:
+        self.__tela_paciente.mostra_mensagem("Atenção: paciente não existe. Tente novamente.")
 
   def pega_paciente_por_cpf(self, cpf: int):
     for paciente in self.__pacientes:
@@ -59,14 +59,15 @@ class ControladorPaciente():
 
   def excluir_paciente(self):
     self.lista_pacientes()
-    cpf_paciente = self.__tela_paciente.seleciona_paciente()
-    paciente = self.pega_paciente_por_cpf(cpf_paciente)
-
-    if(paciente is not None):
-      self.__pacientes.remove(paciente)
-      self.lista_pacientes()
-      self.__tela_paciente.mostra_mensagem("Excluído com sucesso!")
-    else:
-      self.__tela_paciente.mostra_mensagem("Atenção: paciente não existe. Tente novamente.")
+    if (len(self.__pacientes)) != 0:
+      cpf_paciente = self.__tela_paciente.seleciona_paciente()
+      paciente = self.pega_paciente_por_cpf(cpf_paciente)
+  
+      if(paciente is not None):
+        self.__pacientes.remove(paciente)
+        self.lista_pacientes()
+        self.__tela_paciente.mostra_mensagem("Excluído com sucesso!")
+      else:
+        self.__tela_paciente.mostra_mensagem("Atenção: paciente não existe. Tente novamente.")
     
     

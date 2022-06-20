@@ -4,7 +4,14 @@ class TelaVacinacao():
     def pega_dados(self):
         print("")
         print("Informe os dados: ")
-        cpf = int(input("CPF: "))
+
+
+        while True:
+          try:
+            cpf = int(input("CPF: "))
+            break
+          except:
+            print ("Valor inválido. Digite um número inteiro, sem caracteres")
         data_de_vacinacao = input("Data de vacinação (DD/MM/YYYY): ")
         vacina = input("Nome da vacina: ")
         dose = input("Código do lote: ")

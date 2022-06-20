@@ -39,6 +39,11 @@ class TelaEnfermeiro:
     print ("11 - Registrar vacinação")
     print ("12 - Listar vacinação")
     print("*******")
-    opcao = int(input("Opção: "))
+    while True:
+      try:
+        opcao = int(input("Opção: "))
+        break
+      except:
+        print ("Valor inválido. Digite um número de 0 a 12")
     return opcao
 

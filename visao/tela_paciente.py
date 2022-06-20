@@ -6,9 +6,21 @@ class TelaPaciente():
     print("")
     print("Informe os dados: ")
     nome = input("Nome: ")
-    cpf = int(input("CPF: "))
+    while True:
+      try:
+        cpf = int(input("CPF: "))
+        break
+      except:
+        print ("Valor inválido. Digite um número inteiro, sem caracteres")
+
     data_de_nascimento = input("Data de nascimento (DD/MM/YYYY): ")
-    telefone = int(input("Telefone: "))
+    
+    while True:
+      try:
+        telefone = int(input("Telefone: "))
+        break
+      except:
+        print ("Valor inválido. Digite um número inteiro, sem caracteres")
     nome_responsavel = input("Nome do responsável: ")
     print("")
     return {"nome": nome, "cpf": cpf, "data_de_nascimento": data_de_nascimento, "telefone": telefone, "nome_responsavel": nome_responsavel}

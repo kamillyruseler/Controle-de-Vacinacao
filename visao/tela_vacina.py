@@ -5,8 +5,21 @@ class TelaVacina():
     print("")
     print("Informe os dados: ")
     doenca = input("Doença: ")
-    faixa_etaria_inicial = int(input("Faixa etária inicial em meses (número inteiro): "))
-    faixa_etaria_final = int(input("Faixa etária FINAL em meses (número inteiro): "))
+
+    while True:
+      try:     
+        faixa_etaria_inicial = int(input("Faixa etária inicial em meses (número inteiro): "))
+        break
+      except:
+        print ("Valor inválido. Digite um número inteiro")
+
+    while True:
+      try:
+        faixa_etaria_final = int(input("Faixa etária FINAL em meses (número inteiro): "))
+        break
+      except:
+        print ("Valor inválido. Digite um número inteiro")
+        
     print("")
     return {"doenca": doenca, "faixa_etaria_inicial": faixa_etaria_inicial, "faixa_etaria_final": faixa_etaria_final}
 
