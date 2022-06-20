@@ -1,5 +1,3 @@
-#cálculo da próxima dose
-#listar vacinas que o paciente precisa tomar
 from visao.tela_vacinacao import TelaVacinacao
 from modelo.vacinacao import Vacinacao
 from datetime import datetime

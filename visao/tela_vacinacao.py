@@ -1,4 +1,6 @@
 class TelaVacinacao():
+
+  
     def pega_dados(self):
         print("")
         print("Informe os dados: ")

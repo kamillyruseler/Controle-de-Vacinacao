@@ -1,16 +1,6 @@
 
 
 class TelaPaciente():
-  def tela_opcoes(self): #não estou chamando
-    print ("Área de Pacientes")
-    print ("Escolha a opção")
-    print ("1 - Inclui paciente")
-    print ("2 - Altera paciente")
-    print ("3 - Exclui paciente")
-    print ("0 - Retornar")
-
-    opcao = int(input("Escolha a opção: "))
-    return opcao
 
   def pega_dados(self):
     print("")

@@ -7,12 +7,13 @@ class Paciente(Pessoa):
     super().__init__(nome, cpf, data_de_nascimento, telefone) 
     if isinstance (nome_responsavel, str):
       self.__nome_responsavel = nome_responsavel
-    
 
+    
   @property
   def nome_responsavel(self):
     return self.__nome_responsavel
 
+  
   @nome_responsavel.setter
   def nome_responsavel(self, nome_responsavel: str):
     if isinstance(nome_responsavel, str):

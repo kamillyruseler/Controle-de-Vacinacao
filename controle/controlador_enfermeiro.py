@@ -2,27 +2,24 @@ from visao.tela_enfermeiro import TelaEnfermeiro
 from modelo.enfermeiro import Enfermeiro
 from controle.controlador_paciente import ControladorPaciente
 from controle.controlador_vacina import ControladorVacina
-#from modelo.dose import Dose
 from visao.tela_dose import TelaDose
-#lista de enfermeiros autorizados no sistema
 from controle.controlador_vacinacao import ControladorVacinacao
 
 class ControladorEnfermeiro:
+  
   def __init__(self):
-    self.__enfermeiros = [Enfermeiro("Enfermeiro teste", 1234567, 10/12/1998, 4798840, "a", "a", 123)] #código do enfermeiro continua sendo útil?
+    self.__enfermeiros = [Enfermeiro("Enfermeiro teste", 1234567, 10/12/1998, 4798840, "a", "a", 123)] 
     self.__tela_enfermeiro = TelaEnfermeiro()
     self.__tela_dose = TelaDose()
     self.__manter_tela = True
-
     self.__controlador_paciente = ControladorPaciente()
     self.__controlador_vacina = ControladorVacina()
     self.__controlador_vacinacao = ControladorVacinacao(self.__controlador_paciente, self.__controlador_vacina)
-    
 
   
   def retornar(self):
     exit(0)
-  
+
   
   def logar(self):
     dados_enfermeiro = self.__tela_enfermeiro.mostra_tela_login()

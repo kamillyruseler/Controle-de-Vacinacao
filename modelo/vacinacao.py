@@ -1,9 +1,5 @@
 from datetime import date
 
-#revendo necessidade do código de vacinação
-
-#(dados_vacinacao ["cpf"], dados_vacinacao["data_de_vacinacao"], dados_vacinacao["doenca"], dados_vacinacao["dose"])
-
 class Vacinacao():
   def __init__(self, cpf: int, data_de_vacinacao: date, vacina: str, dose: str):
     if isinstance (data_de_vacinacao, date):
@@ -15,8 +11,6 @@ class Vacinacao():
     if isinstance(dose, str):
         self.__dose = dose
     self.__vacinas = []
-
-  #lista de vacinas para gerar relatório
   
   @property
   def dose(self):
@@ -27,7 +21,6 @@ class Vacinacao():
     if isinstance (dose, str):
       self.__dose = dose
 
-  
   @property
   def vacina(self):
     return self.__vacina

@@ -41,7 +41,6 @@ class ControladorVacina():
     if len(self.__vacinas)!=0:
       for vacina in self.__vacinas:
         self.__tela_vacina.mostra_vacina({"doenca": vacina.doenca, "faixa_etaria_inicial": vacina.faixa_etaria_inicial, "faixa_etaria_final": vacina.faixa_etaria_final})
-        # só mostra doses para vacinas já cadastradas
         for dose in self.__doses:
           if (dose.doenca == vacina.doenca):
             self.__tela_dose.mostra_dose_por_doenca({"lote": dose.lote})

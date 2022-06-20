@@ -11,7 +11,7 @@ class ControladorPaciente():
     self.__pacientes = []
     self.__tela_paciente = TelaPaciente()
 
-
+  
   def inclui_paciente(self):
     dados_paciente = self.__tela_paciente.pega_dados()
     data_de_nascimento = datetime.strptime(dados_paciente["data_de_nascimento"], "%d/%m/%Y")
@@ -26,12 +26,6 @@ class ControladorPaciente():
     diferenca =  relativedelta(d2, data_de_nascimento)
     self.__tela_paciente.mostra_mensagem(("{} ano(s), {} mes(es), {} dias"
        .format(diferenca.years, diferenca.months, diferenca.days)))   
-
-  def proximas_doses (self):
-    for vacina in self.__vacinas:
-      print (diferenca.months)
-    #verificar pela faixa etária. 
-    #def calcular_idade em controlador_paciente
   
   def lista_pacientes(self):
     if len(self.__pacientes)!=0:
@@ -46,7 +40,6 @@ class ControladorPaciente():
     cpf_paciente = self.__tela_paciente.seleciona_paciente()
     paciente = self.pega_paciente_por_cpf(cpf_paciente)
    
-
     if (paciente is not None):
       novos_dados = self.__tela_paciente.pega_dados()
       paciente.nome = novos_dados["nome"]
