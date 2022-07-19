@@ -1,3 +1,4 @@
+from excecoes.valor_invalido import ValorInvalido
 
 
 class TelaEnfermeiro:
@@ -41,8 +42,10 @@ class TelaEnfermeiro:
     while True:
       try:
         opcao = int(input("Opção: "))
+        if opcao > 11 or opcao < 0:
+          raise ValorInvalido()
         break
       except:
-        print ("Valor inválido. Digite um número de 0 a 12")
+        raise ValorInvalido()
     return opcao
 

@@ -4,6 +4,7 @@ from controle.controlador_paciente import ControladorPaciente
 from controle.controlador_vacina import ControladorVacina
 from visao.tela_dose import TelaDose
 from controle.controlador_vacinacao import ControladorVacinacao
+from excecoes.valor_invalido import ValorInvalido
 
 class ControladorEnfermeiro:
   
@@ -36,7 +37,11 @@ class ControladorEnfermeiro:
     switcher = {0: self.retornar, 1: self.__controlador_paciente.inclui_paciente, 2: self.__controlador_paciente.lista_pacientes, 3: self.__controlador_paciente.excluir_paciente, 4: self.__controlador_vacina.incluir_vacina, 5: self.__controlador_vacina.lista_vacinas, 6: self.__controlador_vacina.alterar_vacina, 7: self.__controlador_vacina.excluir_vacina, 8: self.__controlador_vacina.incluir_dose, 9: self.__controlador_vacina.lista_doses, 10: self.__controlador_vacinacao.registrar_vacinacao, 11: self.__controlador_vacinacao.lista_vacinacao}
     self.__manter_tela = True
     while self.__manter_tela:
-      opcao_escolhida = self.__tela_enfermeiro.mostra_tela_opcoes()
+      try:
+        opcao_escolhida = self.__tela_enfermeiro.mostra_tela_opcoes()
+      except ValorInvalido:
+        self.__tela_enfermeiro.mostra_mensagem('Valor inválido')
+        return self.abre_tela_inicial()
       funcao_escolhida = switcher[opcao_escolhida]
       funcao_escolhida()
       

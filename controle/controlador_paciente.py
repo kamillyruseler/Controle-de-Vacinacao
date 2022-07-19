@@ -2,6 +2,7 @@ from visao.tela_paciente import TelaPaciente
 from modelo.paciente import Paciente
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
+from excecoes.cpf_incorreto import CpfIncorreto
 #pip install python-dateutil
 
 
@@ -13,7 +14,11 @@ class ControladorPaciente():
 
   
   def inclui_paciente(self):
-    dados_paciente = self.__tela_paciente.pega_dados()
+    try:
+      dados_paciente = self.__tela_paciente.pega_dados()
+    except CpfIncorreto:
+      self.__tela_paciente.mostra_mensagem("CPF incorreto!")
+      return self.inclui_paciente()
     data_de_nascimento = datetime.strptime(dados_paciente["data_de_nascimento"], "%d/%m/%Y")
     paciente = Paciente(dados_paciente["nome"],dados_paciente["cpf"], data_de_nascimento, dados_paciente["telefone"], dados_paciente["nome_responsavel"])
     existe = False

@@ -1,3 +1,4 @@
+from excecoes.cpf_incorreto import CpfIncorreto
 
 
 class TelaPaciente():
@@ -11,7 +12,7 @@ class TelaPaciente():
         cpf = int(input("CPF: "))
         break
       except:
-        print ("Valor inválido. Digite um número inteiro, sem caracteres")
+        raise CpfIncorreto()
 
     data_de_nascimento = input("Data de nascimento (DD/MM/YYYY): ")
     
