@@ -1,21 +1,38 @@
 from excecoes.valor_invalido import ValorInvalido
-
+import PySimpleGUI as sg
 
 class TelaEnfermeiro:
   def __init__(self):
-    pass
+    self.__window = None
+    self.mostra_tela_login()
 
   def mostra_tela_login(self):
-    print("\n")
-    print ("Por favor, informe os seus dados:")
-    email = input("Email: ")
-    senha = input("Senha: ")
-    print("")
+    sg.ChangeLookAndFeel('DarkTeal4')
+    layout = [
+      [sg.Text('Por favor, informe os seus dados:', font=("Helvica", 25))],
+      [sg.Text('Email:', size=(15, 1)), sg.InputText('', key='email')],
+      [sg.Text('Senha:', size=(15, 1)), sg.InputText('', key='senha')]
+      
+    ]
+    self.__window = sg.Window('Controle de vacinação').Layout(layout)
+    button, values = self.open()
+    email = values['email']
+    senha = values['senha']
+    [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+    self.close()
     return {"email": email, "senha": senha}
 
   def mostra_mensagem (self, mensagem: str):
     print (mensagem)
 
+  def close(self):
+    self.__window.Close()
+
+  def open(self):
+    button, values = self.__window.Read()
+    return button, values
+  
+  
   def mostra_tela_opcoes(self):
     print("")
     print("*******")

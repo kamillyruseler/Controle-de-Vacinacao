@@ -4,6 +4,9 @@ class TelaSistema:
   def __init__(self):
     self.__window = None
     self.init_components()
+
+  def close(self):
+      self.__window.Close()
   
   def mostrar_menu_inicial(self):
     self.init_components()
@@ -17,9 +20,6 @@ class TelaSistema:
       opcao = 0
     self.close()
     return opcao
-
-    def close(self):
-      self.__window.Close()
 
   def init_components(self):
     sg.ChangeLookAndFeel('DarkTeal4')
