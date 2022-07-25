@@ -1,49 +1,76 @@
 from excecoes.cpf_incorreto import CpfIncorreto
+from excecoes.valor_invalido import ValorInvalido
+import PySimpleGUI as sg
 
 
-class TelaPaciente():
+class TelaPaciente:
+  def __init__(self):
+    self.__window = None
 
   def pega_dados(self):
-    print("")
-    print("Informe os dados: ")
-    nome = input("Nome: ")
-    while True:
-      try:
-        cpf = int(input("CPF: "))
-        break
-      except:
-        raise CpfIncorreto()
+    layout = [
+      [sg.Text('Adicionar paciente', font=("Helvica", 25))],
+      [sg.Text('Nome: '), sg.In(key='nome')],
+      [sg.Text('CPF: '), sg.In(key='cpf')],
+      [sg.Text('Data de nascimento (DD/MM/YYYY):: '), sg.In(key='data_de_nascimento')],
+      [sg.Text('Telefone: '), sg.In(key='telefone')],
+      [sg.Text('Nome do responsável: '), sg.In(key='nome_responsavel')],
+      [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+    ]
+    self.__window = sg.Window('Controle de vacinação').Layout(layout)
+    button, values = self.__window.Read()
+    self.__window.close()
+    if button in (None, 'Cancelar'):
+      return 0
+    try:
+      cpf = int(values['cpf'])
+    except:
+      raise CpfIncorreto()
 
-    data_de_nascimento = input("Data de nascimento (DD/MM/YYYY): ")
-    
-    while True:
-      try:
-        telefone = int(input("Telefone: "))
-        break
-      except:
-        print ("Valor inválido. Digite um número inteiro, sem caracteres")
-    nome_responsavel = input("Nome do responsável: ")
-    print("")
-    return {"nome": nome, "cpf": cpf, "data_de_nascimento": data_de_nascimento, "telefone": telefone, "nome_responsavel": nome_responsavel}
+    try:
+      telefone = int(values['telefone'])
+    except:
+      raise ValorInvalido()
+    return {"nome": values['nome'], "cpf": cpf, "data_de_nascimento": values['data_de_nascimento'], "telefone": telefone, "nome_responsavel": values['nome_responsavel']}
 
-  def mostra_paciente (self, dados_paciente):
-    print("")
-    print("Nome: ", dados_paciente["nome"])
-    print("CPF: ", dados_paciente["cpf"])
-    print("Data de nascimento: ", dados_paciente["data_de_nascimento"])
-    print("Telefone: ", dados_paciente["telefone"])
-    print("Responsável: ", dados_paciente["nome_responsavel"])
-    print("")
+  def mostra_pacientes (self, dados_pacientes):
+    column = []
+    for dados_paciente in dados_pacientes:
+      column.extend([
+        [sg.Text('- - - -')],
+        [sg.Text('Nome: ' + dados_paciente['nome'])],
+        [sg.Text('CPF: ' + str(dados_paciente['cpf']))],
+        [sg.Text('Data de nascimento: ' + str(dados_paciente['data_de_nascimento']))],
+        [sg.Text('Telefone: ' + str(dados_paciente["telefone"]))],
+        [sg.Text('Responsável: ' + dados_paciente['nome_responsavel'])],
+      ])
+    layout = [
+      [sg.Text('Detalhes', font=("Helvica", 15))],
+      [sg.Column(column, scrollable=True, vertical_scroll_only=True, size=(200, 250))],
+      [sg.Button('Voltar')],
+    ]
+    self.__window = sg.Window('Controle de vacinação').Layout(layout)
+    self.__window.Read()
+    self.__window.close()
 
   def seleciona_paciente(self):
-    print("")
-    cpf = input("CPF que deseja selecionar: ")
-    print("")
+    layout = [
+      [sg.Text('Selecionar paciente', font=("Helvica", 25))],
+      [sg.Text('CPF: '), sg.In(key='cpf')],
+      [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+    ]
+    self.__window = sg.Window('Controle de vacinação').Layout(layout)
+    button, values = self.__window.Read()
+    self.__window.close()
+    if button in (None, 'Cancelar'):
+      return -1
+    try:
+      cpf = int(values['cpf'])
+    except:
+      raise CpfIncorreto()
     return cpf
-    
-  def mostra_mensagem (self, mensagem):
-    print("")
-    print (mensagem)
-    print("")
+
+  def mostra_mensagem(self, mensagem: str):
+    sg.popup('', mensagem)
 
   

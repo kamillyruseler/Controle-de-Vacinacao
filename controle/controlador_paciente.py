@@ -3,10 +3,11 @@ from modelo.paciente import Paciente
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from excecoes.cpf_incorreto import CpfIncorreto
+from excecoes.valor_invalido import ValorInvalido
 #pip install python-dateutil
 
 
-class ControladorPaciente():
+class ControladorPaciente:
 
   def __init__(self):
     self.__pacientes = []
@@ -19,7 +20,16 @@ class ControladorPaciente():
     except CpfIncorreto:
       self.__tela_paciente.mostra_mensagem("CPF incorreto!")
       return self.inclui_paciente()
-    data_de_nascimento = datetime.strptime(dados_paciente["data_de_nascimento"], "%d/%m/%Y")
+    except ValorInvalido:
+      self.__tela_paciente.mostra_mensagem("Valor inválido. Digite um número inteiro, sem caracteres")
+      return self.inclui_paciente()
+    if dados_paciente == 0:
+      return
+    try:
+      data_de_nascimento = datetime.strptime(dados_paciente["data_de_nascimento"], "%d/%m/%Y")
+    except:
+      self.__tela_paciente.mostra_mensagem("Data em formato incorreto")
+      return self.inclui_paciente()
     paciente = Paciente(dados_paciente["nome"],dados_paciente["cpf"], data_de_nascimento, dados_paciente["telefone"], dados_paciente["nome_responsavel"])
     existe = False
     for paciente in self.__pacientes:
@@ -41,8 +51,10 @@ class ControladorPaciente():
   
   def lista_pacientes(self):
     if len(self.__pacientes)!=0:
+      pacientes = []
       for paciente in self.__pacientes:
-        self.__tela_paciente.mostra_paciente({"nome": paciente.nome, "cpf": paciente.cpf, "data_de_nascimento": paciente.data_de_nascimento, "telefone": paciente.telefone, "nome_responsavel": paciente.nome_responsavel})
+        pacientes.append({"nome": paciente.nome, "cpf": paciente.cpf, "data_de_nascimento": paciente.data_de_nascimento, "telefone": paciente.telefone, "nome_responsavel": paciente.nome_responsavel})
+      self.__tela_paciente.mostra_pacientes(pacientes)
     else:
       self.__tela_paciente.mostra_mensagem("Atenção: não existem pacientes cadastrados")
 
@@ -56,7 +68,15 @@ class ControladorPaciente():
   def excluir_paciente(self):
     self.lista_pacientes()
     if (len(self.__pacientes)) != 0:
-      cpf_paciente = self.__tela_paciente.seleciona_paciente()
+      while True:
+        try:
+          cpf_paciente = self.__tela_paciente.seleciona_paciente()
+          break
+        except CpfIncorreto:
+          self.__tela_paciente.mostra_mensagem("CPF incorreto!")
+          pass
+      if cpf_paciente == -1:
+        return
       paciente = self.pega_paciente_por_cpf(cpf_paciente)
   
       if(paciente is not None):
@@ -65,5 +85,3 @@ class ControladorPaciente():
         self.__tela_paciente.mostra_mensagem("Excluído com sucesso!")
       else:
         self.__tela_paciente.mostra_mensagem("Atenção: paciente não existe. Tente novamente.")
-    
-    

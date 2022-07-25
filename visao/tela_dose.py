@@ -1,28 +1,41 @@
+import PySimpleGUI as sg
 
 
-class TelaDose():
+class TelaDose:
+  def __init__(self):
+    self.__window = None
 
   def pega_dados(self):
-    print("")
-    print("Informe os dados: ")
-    while True:
-      try:
-        doenca = str(input("Doença: "))
-        break
-      except:
-        print ("Valor inválido")
-    lote = str(input("Lote: "))
-    print("")
-    return {"doenca": doenca, "lote": lote}
+    layout = [
+      [sg.Text('Adicionar dose', font=("Helvica", 25))],
+      [sg.Text('Doença: '), sg.In(key='doenca')],
+      [sg.Text('Lote: '), sg.In(key='lote')],
+      [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+    ]
+    self.__window = sg.Window('Controle de vacinação').Layout(layout)
+    button, values = self.__window.Read()
+    self.__window.close()
 
-  def mostra_dose(self, dados_dose):
-    print("Doença: ", dados_dose["doenca"])
-    print("Lote: ", dados_dose["lote"])
-    print("")
+    if button in (None, 'Cancelar'):
+      return 0
+    return values
 
-  def mostra_dose_por_doenca(self, dados_dose):
-    print("Lote: ", dados_dose["lote"])
-    print("")
-  
-  def mostra_mensagem(self, msg):
-    print(msg)
+  def mostra_doses(self, dados_doses):
+    column = []
+    for dados_dose in dados_doses:
+      column.extend([
+        [sg.Text('- - - -')],
+        [sg.Text('Doença: ' + dados_dose['doenca'])],
+        [sg.Text('Lote: ' + dados_dose['lote'])],
+      ])
+    layout = [
+      [sg.Text('Detalhes', font=("Helvica", 15))],
+      [sg.Column(column, scrollable=True, vertical_scroll_only=True, size=(200, 250))],
+      [sg.Button('Voltar')],
+    ]
+    self.__window = sg.Window('Controle de vacinação').Layout(layout)
+    self.__window.Read()
+    self.__window.close()
+
+  def mostra_mensagem(self, mensagem: str):
+    sg.popup('', mensagem)

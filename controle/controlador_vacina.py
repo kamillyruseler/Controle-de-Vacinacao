@@ -2,6 +2,7 @@ from modelo.vacina import Vacina
 from visao.tela_vacina import TelaVacina
 from modelo.dose import Dose
 from visao.tela_dose import TelaDose
+from excecoes.valor_invalido import ValorInvalido
 
 class ControladorVacina():
 
@@ -18,7 +19,12 @@ class ControladorVacina():
     return None
 
   def incluir_vacina(self):
-    dados_vacina = self.__tela_vacina.pega_dados()
+    try:
+      dados_vacina = self.__tela_vacina.pega_dados()
+    except ValorInvalido:
+      return self.__tela_vacina.mostra_mensagem("Valor inválido. Digite um número inteiro")
+    if dados_vacina == 0:
+      return
     vacina = Vacina(dados_vacina["doenca"], dados_vacina["faixa_etaria_inicial"], dados_vacina["faixa_etaria_final"])
     existe = False
     for vacina in self.__vacinas:
@@ -34,10 +40,17 @@ class ControladorVacina():
 
     if (len(self.__vacinas)) != 0:
       doenca = self.__tela_vacina.seleciona_vacina()
+      if doenca == 0:
+        return
       vacina = self.pega_vacina_por_doenca(doenca)
 
       if(vacina is not None):
-        novos_dados_vacina = self.__tela_vacina.pega_dados()
+        try:
+          novos_dados_vacina = self.__tela_vacina.pega_dados()
+        except ValorInvalido:
+          return self.__tela_vacina.mostra_mensagem("Valor inválido. Digite um número inteiro")
+        if novos_dados_vacina == 0:
+          return
         vacina.doenca = novos_dados_vacina["doenca"]
         vacina.faixa_etaria_inicial = novos_dados_vacina["faixa_etaria_inicial"]
         vacina.faixa_etaria_final = novos_dados_vacina["faixa_etaria_final"]
@@ -47,11 +60,14 @@ class ControladorVacina():
 
   def lista_vacinas(self):
     if len(self.__vacinas)!=0:
+      vacinas = []
       for vacina in self.__vacinas:
-        self.__tela_vacina.mostra_vacina({"doenca": vacina.doenca, "faixa_etaria_inicial": vacina.faixa_etaria_inicial, "faixa_etaria_final": vacina.faixa_etaria_final})
+        doses = []
         for dose in self.__doses:
           if (dose.doenca == vacina.doenca):
-            self.__tela_dose.mostra_dose_por_doenca({"lote": dose.lote})
+            doses.append({"lote": dose.lote})
+        vacinas.append({"doenca": vacina.doenca, "faixa_etaria_inicial": vacina.faixa_etaria_inicial, "faixa_etaria_final": vacina.faixa_etaria_final, "doses": doses})
+      self.__tela_vacina.mostra_vacinas(vacinas)
     else:
       self.__tela_vacina.mostra_mensagem("Atenção: não existem vacinas cadastradas")
 
@@ -60,6 +76,8 @@ class ControladorVacina():
     self.lista_vacinas()
     if len(self.__vacinas)!=0:
       doenca = self.__tela_vacina.seleciona_vacina()
+      if doenca == 0:
+        return
       vacina = self.pega_vacina_por_doenca(doenca)
 
       if (vacina is not None):
@@ -71,6 +89,8 @@ class ControladorVacina():
 
   def incluir_dose(self):
     dados_dose = self.__tela_dose.pega_dados()
+    if dados_dose == 0:
+      return
     dose = Dose(dados_dose["doenca"], dados_dose["lote"])
     existe = False
 
@@ -84,7 +104,9 @@ class ControladorVacina():
 
   def lista_doses(self):
       if len(self.__doses)!=0:
+        doses = []
         for dose in self.__doses:
-          self.__tela_dose.mostra_dose({"doenca": dose.doenca, "lote": dose.lote})
+          doses.append({"doenca": dose.doenca, "lote": dose.lote})
+        self.__tela_dose.mostra_doses(doses)
       else:
         self.__tela_dose.mostra_mensagem("Atenção: não existem doses cadastradas")

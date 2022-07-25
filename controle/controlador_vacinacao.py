@@ -1,6 +1,7 @@
 from visao.tela_vacinacao import TelaVacinacao
 from modelo.vacinacao import Vacinacao
 from datetime import datetime
+from excecoes.cpf_incorreto import CpfIncorreto
 
 
 class ControladorVacinacao():
@@ -15,8 +16,18 @@ class ControladorVacinacao():
 
   
   def registrar_vacinacao (self):
-    dados_vacinacao = self.__tela_vacinacao.pega_dados()
-    data_de_vacinacao = datetime.strptime(dados_vacinacao["data_de_vacinacao"], "%d/%m/%Y")
+    try:
+        dados_vacinacao = self.__tela_vacinacao.pega_dados()
+    except CpfIncorreto:
+        self.__tela_vacinacao.mostra_mensagem("CPF incorreto!")
+        return self.registrar_vacinacao()
+    if dados_vacinacao == 0:
+        return
+    try:
+        data_de_vacinacao = datetime.strptime(dados_vacinacao["data_de_vacinacao"], "%d/%m/%Y")
+    except:
+        self.__tela_vacinacao.mostra_mensagem("Data em formato incorreto")
+        return self.registrar_vacinacao()
     vacinacao = Vacinacao(dados_vacinacao ["cpf"], data_de_vacinacao, dados_vacinacao["vacina"], dados_vacinacao["dose"])
     self.__vacinacao.append(vacinacao)
     self.__tela_vacinacao.mostra_mensagem("Cadastrado com sucesso!")
@@ -24,11 +35,17 @@ class ControladorVacinacao():
 
   def lista_vacinacao(self):
     if len(self.__vacinacao)!=0:
-        cpf = self.__tela_vacinacao.pegar_cpf()
+        try:
+          cpf = self.__tela_vacinacao.pegar_cpf()
+        except CpfIncorreto:
+          self.__tela_vacinacao.mostra_mensagem("CPF incorreto!")
+          return self.lista_vacinacao()
+        if cpf == -1:
+          return
+        vacinacoes = []
         for vacinacao in self.__vacinacao:
-            if vacinacao.cpf == cpf:
-              self.__tela_vacinacao.mostra_vacinacao(vacinacao.data_de_vacinacao,
-                                                     vacinacao.vacina,
-                                                     vacinacao.dose)
+          if vacinacao.cpf == cpf:
+            vacinacoes.append(vacinacao)
+        self.__tela_vacinacao.mostra_vacinacao(vacinacoes)
     else:
       self.__tela_vacinacao.mostra_mensagem("Atenção: não existem vacinas aplicadas")

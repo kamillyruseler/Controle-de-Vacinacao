@@ -20,9 +20,9 @@ class ControladorSistema:
             except SystemExit as message:
               print(message)
             sys.exit()
-              
-if __name__ == "__main__":
-    ControladorSistema().iniciar()
+#
+# if __name__ == "__main__":
+#     ControladorSistema().iniciar()
 
     
     
